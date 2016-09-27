@@ -1,0 +1,66 @@
+<html>
+<head>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/scripts.js" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Baloo+Bhaina|Modak|Cinzel|Orbitron|Righteous|Yatra+One" rel="stylesheet">
+    <title>University Registrar</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the University Registrar!</h1>
+        <hr>
+
+        {% if students is not empty %}
+          <h3>Students</h3>
+          <ul>
+          {% for student in students %}
+            <li><a href='/student/{{ student.getId }}'>{{ student.getStudentName }}</a></li>
+            <li>{{ student.getMajor }}</li>
+            <li>{{ student.getEnrollmentDate }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+
+        <form action='/add_student' method='post'>
+            <label for='name'>Student Name</label>
+            <input id='name' name='name' type='text'>
+
+            <label for='major'>student's major</label>
+            <input id='major' name='major' type='text'>
+
+            <label for='enrollment_date'>student's Starting date.</label>
+            <select name="enrollment_date">
+                <option value="Fall">Fall</option>
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
+            </select>
+            <button type='submit'>Add Student</button>
+        </form>
+        <hr>
+        <form action='/delete_all_students' method='post'>
+            <button type='submit' name = "clear student info">clear student info</button>
+        </form>
+        <hr>
+        </form>
+        <form action='/add_courses' method='post'>
+          <label for='courses'>student's courses</label>
+          <input id='courses' name='courses' type='text'>  <label for='enrollment_date'>student's completion status.</label>
+            <select name='completion'>
+                <option value="enrolled">enrolled</option>
+                <option value="passed">passed</option>
+                <option value="failed">failed</option>
+            </select>
+          <button type='submit'>Add courses for a Student</button>
+        </form>
+        <form action='/delete_all_courses' method='post'>
+            <button type='submit'>delete_all_courses</button>
+        </form>
+        <hr>
+
+    </div>
+</body>
+</html>
